@@ -657,7 +657,9 @@ module private HttpHelpers =
         let mutable i = 0
         while i < cookiesWithWrongSplit.Length do
             // the next command is not a new cookie but part of the current one
-            if cookiesWithWrongSplit.[i].IndexOf("expires=", StringComparison.OrdinalIgnoreCase) > 0 then
+            if cookiesWithWrongSplit.Length > i &&
+               cookiesWithWrongSplit.[i].IndexOf("expires=", StringComparison.OrdinalIgnoreCase) > 0
+            then
                 cookies.Add(cookiesWithWrongSplit.[i] + "," + cookiesWithWrongSplit.[i + 1])
                 i <- i + 1
             else
